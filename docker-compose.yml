@@ -1,15 +1,11 @@
 version: "3"
 services:
   sftp:
-    image: atmoz/sftp
-    environment:
-      - USER=${SFTP_USERNAME}
-      - PASS=${SFTP_PASSWORD}
-      - UID=1000
-      - GID=1000
-    volumes:
-      - "../data:/home/sftp"
-    ports:
-      - "2222:22"
-    env_file:
-      - .env
+      image: atmoz/sftp
+      volumes:
+        - ./upload:/home/username
+      ports:
+        - "${SFTP_PORT}:22"
+      env_file:
+        - .env
+      command: ${SFTP_USERNAME}:${SFTP_PASSWORD}:1001
